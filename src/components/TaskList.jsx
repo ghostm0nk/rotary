@@ -1,15 +1,17 @@
-import React from 'react';
+import TaskItem from './TaskItem';
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
   return (
-    <div className="p-4">
-      <h2 className="text-lg font-bold">Tasks</h2>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>{task.name}</li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {tasks.map((task) => (
+        <TaskItem
+          key={task.id}
+          task={task}
+          onUpdateTask={onUpdateTask}
+          onDeleteTask={onDeleteTask}
+        />
+      ))}
+    </ul>
   );
 };
 
