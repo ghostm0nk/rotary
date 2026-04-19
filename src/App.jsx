@@ -1,2 +1,8 @@
 import { supabase } from './utils/supabase.js';
-// ... rest of your code
+import PageLab from './components/PageLab';
+
+function App() {
+  return (
+    <PageLab />
+  );
+}
