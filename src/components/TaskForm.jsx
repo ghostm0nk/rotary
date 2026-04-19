@@ -10,7 +10,7 @@ const TaskForm = ({ onAddTask }) => {
   };
 
   return (
-    <form onSubmit={handleAddTask} className="p-4 border-b border-gray-200">
+    <form onSubmit={handleAddTask} className="p-4 border-b border-gray-200 mt-4">
       <label
         htmlFor="task"
         className="block text-sm font-medium text-gray-700 mb-2"
@@ -26,7 +26,7 @@ const TaskForm = ({ onAddTask }) => {
       />
       <button
         type="submit"
-        className="mt-4 bg-blue-500 p-2 text-white rounded-md hover:bg-blue-600"
+        className="mt-4 bg-blue-500 p-2 text-white rounded-md hover:bg-blue-600 transition-colors"
       >
         Add Task
       </button>
