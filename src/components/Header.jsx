@@ -10,13 +10,13 @@ const Header = ({ user }) => {
   };
 
   return (
-    <header className="bg-white p-4 border-b border-gray-200">
+    <header className="bg-white p-4 border-b border-gray-200 sticky top-0 z-10">
       <nav className="flex justify-between items-center">
         <h1 className="text-lg font-bold text-gray-700">Rotary</h1>
         {user && (
           <div className="relative">
             <button
-              className="bg-gray-100 p-2 rounded-full hover:bg-gray-200"
+              className="bg-gray-100 p-2 rounded-full hover:bg-gray-200 transition-colors"
               onClick={() => setShowMenu(!showMenu)}
             >
               <svg
@@ -38,7 +38,7 @@ const Header = ({ user }) => {
               <ul className="absolute top-full right-0 bg-white p-2 border border-gray-200 rounded-md">
                 <li>
                   <button
-                    className="block p-2 hover:bg-gray-100"
+                    className="block p-2 hover:bg-gray-100 transition-colors"
                     onClick={handleLogout}
                   >
                     Logout
