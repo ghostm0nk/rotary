@@ -26,7 +26,7 @@ const Header = ({ user }) => {
     <header className="bg-white p-4 border-b border-gray-200">
       <nav className="flex justify-between items-center">
         <h1 className="text-lg font-bold text-gray-700">Rotary</h1>
-        {user && (
+        {user ? (
           <div className="relative">
             <button className="bg-gray-100 p-2 rounded-full hover:bg-gray-200" onClick={() => setShowMenu(!showMenu)}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,12 +36,20 @@ const Header = ({ user }) => {
             {showMenu && (
               <ul className="absolute top-full right-0 bg-white p-2 border border-gray-200 rounded-md menu-content">
                 <li>
+                  <a href="/dashboard" className="block p-2 hover:bg-gray-100">Dashboard</a>
+                </li>
+                <li>
                   <button className="block p-2 hover:bg-gray-100" onClick={handleLogout}>
                     Logout
                   </button>
                 </li>
               </ul>
             )}
+          </div>
+        ) : (
+          <div className="flex space-x-4">
+            <a href="/login" className="text-gray-700 hover:text-gray-900">Login</a>
+            <a href="/signup" className="text-gray-700 hover:text-gray-900">Signup</a>
           </div>
         )}
       </nav>
