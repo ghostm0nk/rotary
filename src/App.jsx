@@ -8,7 +8,7 @@ import TaskList from './components/TaskList.jsx';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey); // Export supabase
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -38,11 +38,11 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       {user ? (
-        <TaskList tasks={tasks} setTasks={setTasks} />
+        <TaskList tasks={tasks} setTasks={setTasks} user={user} />
       ) : (
         <div className="w-full max-w-md mx-auto p-4">
-          <LoginForm />
-          <SignupForm />
+          <LoginForm auth={auth} /> // Pass auth to LoginForm
+          <SignupForm auth={auth} /> // Pass auth to SignupForm
         </div>
       )}
     </div>
