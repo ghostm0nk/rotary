@@ -12,7 +12,7 @@ const Header = ({ user }) => {
   return (
     <header className="bg-white p-4 border-b border-gray-200">
       <nav className="flex justify-between items-center">
-        <h1 className="text-lg font-bold">Rotary</h1>
+        <h1 className="text-lg font-bold text-gray-700">Rotary</h1>
         {user && (
           <div className="relative">
             <button
