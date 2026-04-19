@@ -1,58 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import Header from './components/Header';
 import TaskList from './components/TaskList';
-import AuthModal from './components/AuthModal';
-
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
+import TaskForm from './components/TaskForm';
+import { supabase } from './supabase';
 
 function App() {
-  const [user, setUser] = useState(null);
   const [tasks, setTasks] = useState([]);
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [user, setUser] = useState(null);
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
-    const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setSession(session);
+      setUser(session?.user);
     };
-    checkUser();
+    getSession();
   }, []);
 
-  const handleSignUp = async (email, password) => {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+  useEffect(() => {
+    if (user) {
+      const fetchTasks = async () => {
+        const { data, error } = await supabase
+          .from('tasks')
+          .select('*')
+          .eq('user_id', user.id);
+        if (error) console.error(error);
+        else setTasks(data);
+      };
+      fetchTasks();
+    }
+  }, [user]);
+
+  const handleAddTask = async (task) => {
+    const { data, error } = await supabase
+      .from('tasks')
+      .insert([{ ...task, user_id: user.id }]);
     if (error) console.error(error);
-    else console.log(data);
+    else setTasks([...tasks, data[0]]);
   };
 
-  const handleSignIn = async (email, password) => {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  const handleUpdateTask = async (task) => {
+    const { data, error } = await supabase
+      .from('tasks')
+      .update([task]);
     if (error) console.error(error);
-    else console.log(data);
+    else setTasks(tasks.map((t) => t.id === task.id ? task : t));
   };
 
-  const handleSignOut = async () => {
-    const { error } = await supabase.auth.signOut();
+  const handleDeleteTask = async (taskId) => {
+    const { error } = await supabase
+      .from('tasks')
+      .delete()
+      .eq('id', taskId);
     if (error) console.error(error);
+    else setTasks(tasks.filter((t) => t.id !== taskId));
   };
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header user={user} onSignOut={handleSignOut} />
-      {user ? (
-        <TaskList tasks={tasks} />
-      ) : (
-        <button onClick={() => setShowAuthModal(true)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Sign In
-        </button>
-      )}
-      {showAuthModal && (
-        <AuthModal
-          onSignUp={handleSignUp}
-          onSignIn={handleSignIn}
-          onClose={() => setShowAuthModal(false)}
+      <Header user={user} />
+      <main className="p-4">
+        <TaskForm onAddTask={handleAddTask} />
+        <TaskList
+          tasks={tasks}
+          onUpdateTask={handleUpdateTask}
+          onDeleteTask={handleDeleteTask}
         />
-      )}
+      </main>
     </div>
   );
 }
