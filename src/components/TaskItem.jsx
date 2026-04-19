@@ -14,7 +14,7 @@ const TaskItem = ({ task, onUpdateTask, onDeleteTask }) => {
   };
 
   return (
-    <li className="py-4 px-6 bg-white border-b border-gray-200">
+    <li className="py-4 px-6 bg-white border-b border-gray-200 hover:bg-gray-50 transition-colors">
       {isEditing ? (
         <input
           type="text"
@@ -28,21 +28,21 @@ const TaskItem = ({ task, onUpdateTask, onDeleteTask }) => {
       <div className="mt-4 flex justify-end space-x-4">
         {isEditing ? (
           <button
-            className="bg-green-500 p-2 text-white rounded-md hover:bg-green-600"
+            className="bg-green-500 p-2 text-white rounded-md hover:bg-green-600 transition-colors"
             onClick={handleUpdateTask}
           >
             Save
           </button>
         ) : (
           <button
-            className="bg-blue-500 p-2 text-white rounded-md hover:bg-blue-600"
+            className="bg-blue-500 p-2 text-white rounded-md hover:bg-blue-600 transition-colors"
             onClick={() => setIsEditing(true)}
           >
             Edit
           </button>
         )}
         <button
-          className="bg-red-500 p-2 text-white rounded-md hover:bg-red-600"
+          className="bg-red-500 p-2 text-white rounded-md hover:bg-red-600 transition-colors"
           onClick={handleDeleteTask}
         >
           Delete
