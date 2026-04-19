@@ -14,38 +14,40 @@ const TaskItem = ({ task, onUpdateTask, onDeleteTask }) => {
   };
 
   return (
-    <li className="p-2 border-b border-gray-200">
+    <li className="py-4 px-6 bg-white border-b border-gray-200">
       {isEditing ? (
         <input
           type="text"
           value={taskText}
           onChange={(e) => setTaskText(e.target.value)}
-          className="p-2 border border-gray-200 rounded-md"
+          className="block w-full p-2 border border-gray-200 rounded-md text-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         />
       ) : (
-        <span className="text-lg">{task.text}</span>
+        <span className="text-lg text-gray-700">{task.text}</span>
       )}
-      {isEditing ? (
+      <div className="mt-4 flex justify-end space-x-4">
+        {isEditing ? (
+          <button
+            className="bg-green-500 p-2 text-white rounded-md hover:bg-green-600"
+            onClick={handleUpdateTask}
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            className="bg-blue-500 p-2 text-white rounded-md hover:bg-blue-600"
+            onClick={() => setIsEditing(true)}
+          >
+            Edit
+          </button>
+        )}
         <button
-          className="bg-green-500 p-2 text-white rounded-md hover:bg-green-600"
-          onClick={handleUpdateTask}
+          className="bg-red-500 p-2 text-white rounded-md hover:bg-red-600"
+          onClick={handleDeleteTask}
         >
-          Save
+          Delete
         </button>
-      ) : (
-        <button
-          className="bg-blue-500 p-2 text-white rounded-md hover:bg-blue-600"
-          onClick={() => setIsEditing(true)}
-        >
-          Edit
-        </button>
-      )}
-      <button
-        className="bg-red-500 p-2 text-white rounded-md hover:bg-red-600"
-        onClick={handleDeleteTask}
-      >
-        Delete
-      </button>
+      </div>
     </li>
   );
 };
