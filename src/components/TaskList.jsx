@@ -1,8 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from '../utils/supabase.js';
-
-const TaskList = ({ tasks, setTasks, user }) => {
-  // ... rest of your code
-};
-
-export default TaskList;
+// Adjust import to be correctly relative or aliased
+import { supabase } from '../../utils/supabase.js';
+// Rest of the code...
