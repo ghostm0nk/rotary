@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from '../utils/auth.js';
 
-const SignupForm = ({ auth }) => { // Receive auth as a prop
+const SignupForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -10,7 +10,7 @@ const SignupForm = ({ auth }) => { // Receive auth as a prop
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(email, password, username);
     } catch (error) {
       setError(error.message);
     }
