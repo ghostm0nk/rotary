@@ -1,28 +1,20 @@
-import { useState } from 'react';
-import { signOut } from 'firebase/auth';
+import React from 'react';
 
-const Header = ({ user, setShowAuthModal }) => {
-  const handleLogout = async () => {
-    await signOut(auth);
-  };
-
+const Header = ({ user, onSignOut }) => {
   return (
-    <header className="bg-white shadow-sm navbar">
-      <nav className="container mx-auto px-6 py-3 flex justify-between">
+    <header className="bg-white shadow-md p-4">
+      <nav className="flex justify-between items-center">
         <h1 className="text-lg font-bold">Rotary</h1>
         {user ? (
-          <button
-            onClick={handleLogout}
-            className="py-2 px-4 bg-red-500 text-white rounded-lg"
-          >
-            Logout
-          </button>
+          <div className="flex items-center">
+            <span className="mr-4">{user.email}</span>
+            <button onClick={onSignOut} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+              Sign Out
+            </button>
+          </div>
         ) : (
-          <button
-            onClick={() => setShowAuthModal(true)}
-            className="py-2 px-4 bg-blue-500 text-white rounded-lg"
-          >
-            Login
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Sign In
           </button>
         )}
       </nav>
