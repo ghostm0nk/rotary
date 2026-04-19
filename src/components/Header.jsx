@@ -36,9 +36,6 @@ const Header = ({ user }) => {
             {showMenu && (
               <ul className="absolute top-full right-0 bg-white p-2 border border-gray-200 rounded-md menu-content">
                 <li>
-                  <a href="/dashboard" className="block p-2 hover:bg-gray-100">Dashboard</a>
-                </li>
-                <li>
                   <button className="block p-2 hover:bg-gray-100" onClick={handleLogout}>
                     Logout
                   </button>
@@ -48,8 +45,7 @@ const Header = ({ user }) => {
           </div>
         ) : (
           <div className="flex space-x-4">
-            <a href="/login" className="text-gray-700 hover:text-gray-900">Login</a>
-            <a href="/signup" className="text-gray-700 hover:text-gray-900">Signup</a>
+            {/* Removed login and signup links */}
           </div>
         )}
       </nav>
