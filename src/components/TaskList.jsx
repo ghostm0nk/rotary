@@ -1,25 +1,14 @@
-import Task from './Task';
+import React from 'react';
 
-const TaskList = ({ tasks, onAddTask, onUpdateTask, onDeleteTask }) => {
+const TaskList = ({ tasks }) => {
   return (
-    <div className="container mx-auto p-4 mt-4">
-      <h2 className="text-lg font-bold mb-2">Task List</h2>
+    <div className="p-4">
+      <h2 className="text-lg font-bold">Tasks</h2>
       <ul>
         {tasks.map((task) => (
-          <Task
-            key={task.id}
-            task={task}
-            onUpdateTask={onUpdateTask}
-            onDeleteTask={onDeleteTask}
-          />
+          <li key={task.id}>{task.name}</li>
         ))}
       </ul>
-      <button
-        onClick={() => onAddTask({ title: '', description: '', completed: false })}
-        className="py-2 px-4 bg-green-500 text-white rounded-lg mt-4"
-      >
-        Add Task
-      </button>
     </div>
   );
 };
