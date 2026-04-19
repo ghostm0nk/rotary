@@ -2,7 +2,7 @@ import TaskItem from './TaskItem';
 
 const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
   return (
-    <ul className="divide-y divide-gray-200">
+    <ul className="divide-y divide-gray-200 mt-4">
       {tasks.map((task) => (
         <TaskItem
           key={task.id}
